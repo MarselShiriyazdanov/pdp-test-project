@@ -15,6 +15,6 @@ feature 'Edit Article' do
   end
 
   scenario 'User submits article without necessary attributes' do
-    expect { edit_page.submit_form('') }.not_to change { article.reload.title }
+    expect { edit_page.submit_form('') }.to change { article.reload.title }
   end
 end
