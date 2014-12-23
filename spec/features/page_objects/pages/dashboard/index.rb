@@ -3,5 +3,7 @@ module Dashboard
     set_url '/'
 
     section :top_bar, TopBar, '.top-bar'
+
+    element :article, '.article'
   end
 end

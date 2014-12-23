@@ -1,0 +1,9 @@
+= form_for(article) do |f|
+  .row.title
+    = f.label :title
+    = f.text_field :title
+  .row.text
+    = f.label :text
+    = f.text_area :text
+  .row
+    = f.submit class: 'button'

@@ -1,0 +1,10 @@
+.article
+  .row
+    .column.large-4
+      h1
+        = link_to article.title, article_path(article)
+    .column.large-1.edit-article
+      h6
+        = link_to 'Edit', edit_article_path(article)
+  .row.text
+    = article.text
