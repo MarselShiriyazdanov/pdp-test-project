@@ -1,2 +1,5 @@
 = render 'articles/article'
 = render partial: 'comments/comment', collection: article.comments
+.row
+  .column-1.right
+    = link_to 'Add comment', new_article_comment_path(article), class: 'button'
