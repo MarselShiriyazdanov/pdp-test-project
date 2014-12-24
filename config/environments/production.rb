@@ -76,5 +76,15 @@ Rails.application.configure do
 
   # Application specific options
   #
-  config.host = 'fs-rails-base.herokuapp.com'
+  config.host = 'still-spire-1631.herokuapp.com'
+
+  ActionMailer::Base.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: '587',
+    authentication: :plain,
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    domain: 'heroku.com',
+    enable_starttls_auto: true
+  }
 end
