@@ -23,7 +23,7 @@ en:
   hello: "Hello world"
 
   titles:
-    application: Rails Base example site
+    application: PDP test project
     dashboard:
       index: Dashboard
     devise:
