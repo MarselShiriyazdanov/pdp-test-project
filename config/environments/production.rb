@@ -75,6 +75,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Application specific options
-  #
-  config.host = 'fs-rails-base.herokuapp.com'
+
+  config.host = 'still-spire-1631.herokuapp.com'
 end
