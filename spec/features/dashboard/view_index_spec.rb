@@ -13,4 +13,8 @@ feature 'View Dashboard' do
   scenario 'User views dashboard with articles' do
     expect(index_page).to have_article
   end
+
+  scenario 'User views dashboard' do
+    expect(index_page).to have_top_bar text: I18n.t('titles.application')
+  end
 end
