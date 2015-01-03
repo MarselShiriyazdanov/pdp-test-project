@@ -90,6 +90,10 @@ en:
         sign_up: 'Sign up'
         edit_profile: 'Edit profile'
 
+  flash_notices:
+    article_created: 'Article was successfully created.'
+    article_updated: 'Article was successfully updated.'
+
   time:
     formats:
       short_date: "%x"
