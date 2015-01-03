@@ -1,15 +1,13 @@
 class CommentsController < ApplicationController
+  respond_to(:html)
   expose(:article)
   expose(:comments) { article.comments }
   expose(:comment, attributes: :comment_params, ancestor: :comments)
 
   def create
     comment.user = current_user
-    if comment.save
-      redirect_to article_path(comment.article)
-    else
-      render :new
-    end
+    comment.save
+    respond_with(comment, location: article_path(article))
   end
 
   private
