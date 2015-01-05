@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   respond_to(:html)
   expose(:article)
   expose(:comments) { article.comments }

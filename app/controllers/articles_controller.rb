@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :check_rights, only: %i(new create edit update)
+
   respond_to(:html)
   expose(:article, attributes: :article_params)
   expose(:comment) { article.comments.build }
@@ -18,5 +20,10 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:text, :title)
+  end
+
+  def check_rights
+    authenticate_user!
+    render status: :forbidden, text: t('forbidden_page.text') unless current_user.admin?
   end
 end

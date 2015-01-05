@@ -95,6 +95,9 @@ en:
     article_updated: 'Article was successfully updated.'
     comment_created: 'Comment was successfully added.'
 
+  forbidden_page:
+    text: 'Forbidden!11'
+
   time:
     formats:
       short_date: "%x"
