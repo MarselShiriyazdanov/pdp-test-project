@@ -12,10 +12,14 @@ feature 'Create Article' do
   end
 
   scenario 'User successfully submits new article' do
-    expect { new_page.submit_form(title, text) }.to change { Article.count }.by(1)
+    new_page.submit_form(title, text)
+
+    expect(new_page).to have_flash_notice(text: I18n.t('flash_notices.article_created'))
   end
 
   scenario 'User submits article without necessary attribute' do
-    expect { new_page.submit_form(title) }.not_to change { Article.count }
+    new_page.submit_form(title)
+
+    expect(new_page).to have_validation_error_alert
   end
 end

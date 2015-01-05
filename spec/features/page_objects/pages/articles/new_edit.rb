@@ -7,6 +7,8 @@ module Articles
     element :title_input, '.row.title'
     element :text_input, '.row.text'
     element :submit, '.row input.button'
+    element :validation_error_alert, '.row.error'
+    element :flash_notice, '.alert-box.notice'
 
     def submit_form(title = '', text = '')
       fill_form(

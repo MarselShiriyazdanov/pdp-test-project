@@ -1,0 +1,4 @@
+.row.error
+  ul.error
+    - object.errors.full_messages.each do |msg|
+      li.error = msg

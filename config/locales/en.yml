@@ -93,6 +93,7 @@ en:
   flash_notices:
     article_created: 'Article was successfully created.'
     article_updated: 'Article was successfully updated.'
+    comment_created: 'Comment was successfully added.'
 
   time:
     formats:

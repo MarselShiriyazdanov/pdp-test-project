@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
   def create
     comment.user = current_user
-    comment.save
+    flash[:notice] = t('flash_notices.comment_created') if comment.save
     respond_with(comment, location: article_path(article))
   end
 
