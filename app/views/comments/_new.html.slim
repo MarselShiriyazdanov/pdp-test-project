@@ -1,0 +1,9 @@
+.add_comment
+  = form_for([article, comment]) do |f|
+    fieldset
+      legend What do you think?
+      = render 'shared/messages', object: comment
+      .row.text
+        = f.text_area :text
+      .row.right
+        = f.submit class: 'button tiny'
