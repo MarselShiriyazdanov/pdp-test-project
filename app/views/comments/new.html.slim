@@ -1,7 +1,0 @@
-= form_for([article, comment]) do |f|
-  = render 'shared/messages', object: comment
-  .row.text
-    = f.label :text
-    = f.text_area :text
-  .row
-    = f.submit class: 'button'

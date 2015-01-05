@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   respond_to(:html)
   expose(:article, attributes: :article_params)
+  expose(:comment) { article.comments.build }
 
   def create
     article.user = current_user
