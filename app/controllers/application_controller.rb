@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_action :authenticate_user!
-
   protected
 
   def devise_parameter_sanitizer
