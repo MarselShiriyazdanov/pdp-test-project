@@ -6,6 +6,7 @@ module Comments
 
     element :text_input, '.row.text'
     element :submit, '.row input.button'
+    element :validation_error_alert, '.row.error'
 
     def submit_form(text)
       fill_form(

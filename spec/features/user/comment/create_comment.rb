@@ -11,12 +11,14 @@ feature 'Create comment' do
   end
 
   scenario 'User submits comment' do
-    expect { new_comment_page.submit_form('comment') }.to change { Comment.count }
+    new_comment_page.submit_form('comment')
 
     expect(new_comment_page.current_url).to eq(article_url(article))
   end
 
   scenario 'User submits comment without text' do
-    expect { new_comment_page.submit_form('') }.not_to change { Comment.count }
+    new_comment_page.submit_form('')
+
+    expect(new_comment_page).to have_validation_error_alert
   end
 end
