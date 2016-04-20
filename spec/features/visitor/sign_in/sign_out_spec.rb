@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Sign out' do
+feature "Sign out" do
   let(:user) { create :user, :confirmed }
 
   let(:login_page) { Devise::Sessions::New.new }
@@ -8,10 +8,10 @@ feature 'Sign out' do
 
   before(:each) do
     login_page.load
-    login_page.sign_in(user.email, '123456')
+    login_page.sign_in(user.email, "123456")
   end
 
-  scenario 'Logged in user signs out' do
+  scenario "Logged in user signs out" do
     index_page.load
     index_page.top_bar.sign_out_link.click
 

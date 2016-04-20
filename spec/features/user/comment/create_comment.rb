@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Create comment' do
+feature "Create comment" do
   let(:user) { create :user, :confirmed }
   let(:article) { create :article }
   let(:article_page) { Articles::Show.new }
@@ -10,14 +10,14 @@ feature 'Create comment' do
     article_page.load(id: article.id)
   end
 
-  scenario 'User submits comment' do
-    article_page.submit_form('comment')
+  scenario "User submits comment" do
+    article_page.submit_form("comment")
 
     expect(article_page).to have_comment_notice
   end
 
-  scenario 'User submits comment without text' do
-    article_page.submit_form('')
+  scenario "User submits comment without text" do
+    article_page.submit_form("")
 
     expect(article_page).to have_validation_error_alert
   end

@@ -2,9 +2,9 @@ FactoryGirl.define do
   factory :user do
     email
 
-    full_name 'John Smith'
-    password '123456'
-    password_confirmation '123456'
+    full_name "John Smith"
+    password "123456"
+    password_confirmation "123456"
   end
 
   trait :confirmed do
@@ -15,7 +15,7 @@ FactoryGirl.define do
     confirmed_at nil
 
     after(:create) do |user|
-      user.update_attributes(confirmation_sent_at: 3.days.ago)
+      user.update_attributes!(confirmation_sent_at: 3.days.ago)
     end
   end
 end

@@ -7,13 +7,25 @@ class ArticlesController < ApplicationController
 
   def create
     article.user = current_user
-    flash[:notice] = t('flash_notices.article_created') if article.save
+    flash[:notice] = t("flash_notices.article_created") if article.save
     respond_with(article)
   end
 
   def update
-    flash[:notice] = t('flash_notices.article_updated') if article.save
+    flash[:notice] = t("flash_notices.article_updated") if article.save
     respond_with(article)
+  end
+
+  def show
+  end
+
+  def index
+  end
+
+  def edit
+  end
+
+  def new
   end
 
   private
@@ -24,6 +36,6 @@ class ArticlesController < ApplicationController
 
   def check_rights
     authenticate_user!
-    render status: :forbidden, text: t('forbidden_page.text') unless current_user.admin?
+    render status: :forbidden, text: t("forbidden_page.text") unless current_user.admin?
   end
 end

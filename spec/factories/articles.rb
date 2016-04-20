@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :article do
-    title 'Article'
-    text ' some text' * 10
+    title "Article"
+    text " some text" * 10
     user
   end
 end

@@ -1,9 +1,9 @@
 module Dashboard
   class Index < SitePrism::Page
-    set_url '/'
+    set_url "/"
 
-    section :top_bar, TopBar, '.top-bar'
+    section :top_bar, TopBar, ".top-bar"
 
-    element :article, '.article'
+    element :article, ".article"
   end
 end

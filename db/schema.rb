@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105183610) do
+ActiveRecord::Schema.define(version: 20160420182023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: true do |t|
-    t.string   "title",      null: false
-    t.text     "text",       null: false
+  create_table "articles", force: :cascade do |t|
+    t.string   "title",      limit: 255, null: false
+    t.text     "text",                   null: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "comments", force: true do |t|
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
     t.text     "text",       null: false
     t.integer  "user_id",    null: false
     t.integer  "article_id", null: false
@@ -32,25 +34,28 @@ ActiveRecord::Schema.define(version: 20150105183610) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "reset_password_token"
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string   "confirmation_token"
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.integer  "sign_in_count",          default: 0
+    t.string   "unconfirmed_email",      limit: 255
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "full_name"
-    t.boolean  "admin",                  default: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.string   "full_name",              limit: 255
+    t.boolean  "admin",                              default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

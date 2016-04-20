@@ -9,9 +9,9 @@ class CommentsController < ApplicationController
   def create
     comment.user = current_user
     if comment.save
-      redirect_to article_path(article), notice: t('flash_notices.comment_created')
+      redirect_to article_path(article), notice: t("flash_notices.comment_created")
     else
-      render 'articles/show'
+      render "articles/show"
     end
   end
 
