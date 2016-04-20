@@ -1,42 +1,32 @@
 require "rails_helper"
 
-feature "Sign in" do
-  let(:user) { create :user, :confirmed }
-  let(:not_confirmed_user) { create :user, :not_confirmed }
-  let(:password) { "123456" }
+feature "Sign In" do
+  let(:user) { create :user }
+  let(:unconfirmed_user) { create :user, :not_confirmed }
 
-  let(:login_page) { Devise::Sessions::New.new }
-  let(:forgot_password_page) { Devise::Passwords::New.new }
+  def sign_in(email, password)
+    visit new_user_session_path
 
-  before(:each) do
-    login_page.load
+    fill_form(:user, email: email, password: password)
+    click_button "Sign in"
   end
 
-  scenario "User signs in successfully" do
-    login_page.sign_in(user.email, password)
+  scenario "Visitor signs in with valid credentials" do
+    sign_in(user.email, user.password)
 
-    expect(login_page.top_bar).to have_sign_out_link
+    expect(page).to have_content("Sign out")
   end
 
-  scenario "User signs in with invalid credentials" do
-    login_page.sign_in(user.email, "wrong password")
+  scenario "Visitor signs in with invalid credentials" do
+    sign_in(user.email, "wrong password")
 
-    expect(login_page.top_bar).to have_sign_in_link
+    expect(page).to have_content("Sign in")
+    expect(page).to have_content("Invalid email or password")
   end
 
-  scenario "User has not confirmed email address" do
-    login_page.sign_in(not_confirmed_user.email, password)
+  scenario "Visitor signs in with unconfirmed email address" do
+    sign_in(unconfirmed_user.email, user.password)
 
-    expect(login_page).to have_confirm_account_alert
-  end
-
-  scenario "User forgets his password" do
-    forgot_password_page.load
-    forgot_password_page.recover_password(user.email)
-
-    open_email(user.email)
-
-    expect(current_email).to have_subject "Reset password instructions"
-    expect(current_email).to have_body_text(user.full_name)
+    expect(page).to have_content("pYou have to confirm your account before continuing.")
   end
 end

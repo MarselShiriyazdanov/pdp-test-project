@@ -3,22 +3,23 @@ require "rails_helper"
 feature "Create comment" do
   let(:user) { create :user, :confirmed }
   let(:article) { create :article }
-  let(:article_page) { Articles::Show.new }
 
   before do
     login_as(user, scope: :user)
-    article_page.load(id: article.id)
+    visit article_path(article)
   end
 
   scenario "User submits comment" do
-    article_page.submit_form("comment")
+    fill_form(:comment, text: "comment")
+    click_button "Create Comment"
 
-    expect(article_page).to have_comment_notice
+    expect(page).to have_content(I18n.t("flash_notices.comment_created"))
   end
 
   scenario "User submits comment without text" do
-    article_page.submit_form("")
+    fill_form(:comment, text: "")
+    click_button "Create Comment"
 
-    expect(article_page).to have_validation_error_alert
+    expect(page).to have_content("Text can't be blank")
   end
 end

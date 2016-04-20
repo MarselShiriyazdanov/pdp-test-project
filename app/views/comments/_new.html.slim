@@ -4,6 +4,7 @@
       legend What do you think?
       = render "shared/messages", object: comment
       .row.text
+        = f.label :text
         = f.text_area :text
       .row.right
         = f.submit class: "button tiny"

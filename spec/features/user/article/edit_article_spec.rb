@@ -2,25 +2,26 @@ require "rails_helper"
 
 feature "Edit Article" do
   let(:user) { create :user, :confirmed, admin: true }
-  let(:edit_page) { Articles::Edit.new }
   let(:article) { create :article }
 
   before do
     login_as(user, scope: :user)
-    edit_page.load(id: article.id)
+    visit edit_article_path(article)
   end
 
   context "Admin user" do
     scenario "User successfully updates article" do
-      edit_page.submit_form("1", "2")
+      fill_form(:article, title: "New title", text: "New text")
+      click_button "Update Article"
 
-      expect(edit_page).to have_flash_notice(text: I18n.t("flash_notices.article_updated"))
+      expect(page).to have_content(I18n.t("flash_notices.article_updated"))
     end
 
     scenario "User submits article without necessary attributes" do
-      edit_page.submit_form("")
+      fill_form(:article, title: "New title", text: "")
+      click_button "Update Article"
 
-      expect(edit_page).to have_validation_error_alert
+      expect(page).to have_content("Text can't be blank")
     end
   end
 

@@ -1,38 +1,23 @@
 require "rails_helper"
 
-feature "Sign up" do
-  let(:user) { User.first }
+feature "Sign Up" do
+  let(:user_attributes) { attributes_for(:user).slice(:full_name, :email, :password, :password_confirmation) }
+  let(:registered_user) { User.find_by_email(user_attributes[:email]) }
 
-  let(:sign_up_page) { Devise::Registrations::New.new }
-  let(:resend_confirmation_page) { Devise::Confirmations::New.new }
-  let(:index_page) { Dashboard::Index.new }
+  scenario "Visitor signs up" do
+    visit new_user_registration_path
 
-  before(:each) do
-    sign_up_page.load
-    sign_up_page.register
-  end
+    fill_form(:user, user_attributes)
+    click_button "Sign up"
 
-  scenario "User signs up successfully" do
-    open_email(user.email)
+    open_email(registered_user.email)
 
-    expect(current_email).to have_subject "Confirmation instructions"
-    expect(current_email).to have_body_text(user.full_name)
-  end
+    expect(current_email).to have_subject("Confirmation instructions")
+    expect(page).to have_text(registered_user.email)
 
-  scenario "User confirms account" do
-    open_email(user.email)
-    visit_in_email "Confirm my account"
+    visit_in_email("Confirm my account")
 
-    expect(index_page.top_bar).to have_text(user.email)
-  end
-
-  scenario "User resents email confirmation instructions" do
-    resend_confirmation_page.load
-    resend_confirmation_page.resend_confirmation_instructions(user.email)
-
-    open_email(user.email)
-
-    expect(current_email).to have_subject "Confirmation instructions"
-    expect(current_email).to have_body_text(user.full_name)
+    expect(page).to have_content("Your account was successfully confirmed.")
+    expect(page).to have_text(registered_user.email)
   end
 end
