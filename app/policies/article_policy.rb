@@ -1,5 +1,5 @@
 class ArticlePolicy < ApplicationPolicy
   def manage?
-    user.admin?
+    user && user.admin?
   end
 end
