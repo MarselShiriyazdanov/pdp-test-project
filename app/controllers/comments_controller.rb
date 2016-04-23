@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   respond_to(:html)
   expose(:article)
-  expose(:comments) { article.comments }
+  expose(:comments) { Comment.by_article(article) }
   expose(:comment, attributes: :comment_params, ancestor: :comments)
 
   def create
