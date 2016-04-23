@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-  include Pundit
-  protect_from_forgery with: :exception
+  include Authentication
+  include Authorization
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  protect_from_forgery with: :exception
 
   protected
 
@@ -16,9 +16,5 @@ class ApplicationController < ActionController::Base
 
   decent_configuration do
     strategy DecentExposure::StrongParametersStrategy
-  end
-
-  def user_not_authorized
-    render status: :forbidden, text: t("forbidden_page.text")
   end
 end
