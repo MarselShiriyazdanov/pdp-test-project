@@ -3,7 +3,7 @@ PDP test project
 
 Third-party service badges (if available)
 
-[![Build Status](https://semaphoreci.com/api/v1/MarselShiriyazdanov/pdp-test-project/branches/update-underlying-project/badge.svg)](https://semaphoreci.com/MarselShiriyazdanov/pdp-test-project)
+[![Build Status](https://semaphoreci.com/api/v1/MarselShiriyazdanov/pdp-test-project/branches/master/badge.svg)](https://semaphoreci.com/MarselShiriyazdanov/pdp-test-project)
 [![Test Coverage](https://codeclimate.com/repos/5499a62c69568048ce005b09/badges/fd447e3575ba73aefc1a/coverage.svg)](https://codeclimate.com/repos/5499a62c69568048ce005b09/feed)
 [![Code Climate](https://codeclimate.com/repos/5499a62c69568048ce005b09/badges/fd447e3575ba73aefc1a/gpa.svg)](https://codeclimate.com/repos/5499a62c69568048ce005b09/feed)
 
