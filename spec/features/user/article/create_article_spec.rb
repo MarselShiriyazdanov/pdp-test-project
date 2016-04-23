@@ -1,35 +1,36 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Create Article' do
+feature "Create Article" do
   let(:user) { create :user, :confirmed, admin: true }
-  let(:new_page) { Articles::New.new }
-  let(:title) { '123' }
-  let(:text) { '333' }
+  let(:title) { "123" }
+  let(:text) { "333" }
 
   before do
     login_as(user, scope: :user)
-    new_page.load
+    visit new_article_path
   end
 
-  context 'Admin user' do
-    scenario 'User successfully submits new article' do
-      new_page.submit_form(title, text)
+  context "Admin user" do
+    scenario "User successfully submits new article" do
+      fill_form(:article, title: title, text: text)
+      click_button "Create Article"
 
-      expect(new_page).to have_flash_notice(text: I18n.t('flash_notices.article_created'))
+      expect(page).to have_content(I18n.t("flash_notices.article_created"))
     end
 
-    scenario 'User submits article without necessary attribute' do
-      new_page.submit_form(title)
+    scenario "User submits article without necessary attribute" do
+      fill_form(:article, title: title)
+      click_button "Create Article"
 
-      expect(new_page).to have_validation_error_alert
+      expect(page).to have_content("Text can't be blank")
     end
   end
 
-  context 'Regular user' do
+  context "Regular user" do
     let(:user) { create :user, :confirmed }
 
-    scenario 'User visit new article path' do
-      expect(page).to have_content(I18n.t('forbidden_page.text'))
+    scenario "User visit new article path" do
+      expect(page).to have_content(I18n.t("forbidden_page.text"))
     end
   end
 end

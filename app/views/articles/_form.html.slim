@@ -1,5 +1,5 @@
 = form_for(article) do |f|
-  = render 'shared/messages', object: article
+  = render "shared/messages", object: article
   .row.title
     = f.label :title
     = f.text_field :title
@@ -7,4 +7,4 @@
     = f.label :text
     = f.text_area :text
   .row
-    = f.submit class: 'button'
+    = f.submit class: "button"

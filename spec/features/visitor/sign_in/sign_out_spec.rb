@@ -1,20 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Sign out' do
-  let(:user) { create :user, :confirmed }
+feature "Sign Out" do
+  include_context "current user signed in"
 
-  let(:login_page) { Devise::Sessions::New.new }
-  let(:index_page) { Dashboard::Index.new }
+  scenario "User signs out" do
+    visit "/"
+    click_link "Sign out"
 
-  before(:each) do
-    login_page.load
-    login_page.sign_in(user.email, '123456')
-  end
-
-  scenario 'Logged in user signs out' do
-    index_page.load
-    index_page.top_bar.sign_out_link.click
-
-    expect(index_page.top_bar).to have_sign_in_link
+    expect(page).to have_content("Sign in")
   end
 end

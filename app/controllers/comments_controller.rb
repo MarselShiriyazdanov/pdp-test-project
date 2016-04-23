@@ -3,15 +3,15 @@ class CommentsController < ApplicationController
 
   respond_to(:html)
   expose(:article)
-  expose(:comments) { article.comments }
+  expose(:comments) { Comment.by_article(article) }
   expose(:comment, attributes: :comment_params, ancestor: :comments)
 
   def create
     comment.user = current_user
     if comment.save
-      redirect_to article_path(article), notice: t('flash_notices.comment_created')
+      redirect_to article_path(article), notice: t("flash_notices.comment_created")
     else
-      render 'articles/show'
+      render "articles/show"
     end
   end
 

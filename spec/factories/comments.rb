@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :comment do
-    text 'comment ' * 10
+    text "comment " * 10
     user
     article
   end

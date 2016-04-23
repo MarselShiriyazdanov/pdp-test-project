@@ -1,5 +1,5 @@
-= render 'articles/article'
-= render partial: 'comments/comment', collection: article.comments
+= render "articles/article"
+= render partial: "comments/comment", collection: article.comments
 .row
   .column-1
-    = render 'comments/new', article: article, comment: comment
+    = render "comments/new", article: article, comment: comment

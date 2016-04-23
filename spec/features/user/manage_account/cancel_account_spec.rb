@@ -1,23 +1,22 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Cancel account' do
-  let(:user) { create :user, :confirmed }
+feature "Cancel Account" do
+  include_context "current user signed in"
 
-  let(:login_page) { Devise::Sessions::New.new }
-  let(:edit_user_page) { Devise::Registrations::Edit.new }
-
-  before(:each) do
-    login_page.load
-    login_page.sign_in(user.email, '123456')
+  background do
+    visit edit_user_registration_path(current_user)
   end
 
-  scenario 'I cancel my account' do
-    edit_user_page.load
-    edit_user_page.cancel_account
+  scenario "User cancels account" do
+    click_link "Cancel my account"
 
-    expect(edit_user_page.top_bar).to have_sign_in_link
+    expect(page).to have_content("Sign in")
+    expect(page).to have_content("Bye! Your account was successfully cancelled. We hope to see you again soon.")
 
-    login_page.sign_in(user.email, '123456')
-    expect(login_page).to have_invalid_credentials_alert
+    click_link "Sign in"
+    fill_form(:user, current_user.attributes.slice(:email, :password))
+    click_button "Sign in"
+
+    expect(page).to have_content("Invalid email or password.")
   end
 end
