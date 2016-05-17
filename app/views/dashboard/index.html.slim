@@ -1,3 +1,7 @@
 .row
   .columns
     = render partial: "articles/article", collection: articles
+
+.row
+  .columns
+    = paginate articles
