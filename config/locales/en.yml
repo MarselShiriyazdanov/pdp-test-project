@@ -83,6 +83,7 @@ en:
     navigation:
       main:
         dashboard: 'Dashboard'
+        feedback: 'Contact Us'
         add_article: 'Add new article'
       user:
         sign_in: 'Sign in'
