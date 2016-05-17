@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
 
   resource :feedback, only: %i(new create)
+  get "/about_us", to: 'dashboard#about_us'
 end
