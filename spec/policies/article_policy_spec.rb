@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe ArticlePolicy do
-  let(:user) { build :user, admin: admin }
+  let(:user) { build :user }
   let(:article) { build :article }
   let(:policy) { described_class.new(user, article) }
 
@@ -9,24 +9,22 @@ describe ArticlePolicy do
     context "when there no user" do
       let(:user) { nil }
 
-      it "disallows to managea rticle" do
-        expect(policy.manage?).to be nil
+      it "disallows to update article" do
+        expect(policy.update?).to be nil
       end
     end
 
-    context "when user is admin user" do
-      let(:admin) { true }
-
-      it "allows to manage article" do
-        expect(policy.manage?).to be true
+    context "when user is not article's author" do
+      it "allows to update article" do
+        expect(policy.update?).to be false
       end
     end
 
-    context "when user is regular user" do
-      let(:admin) { false }
+    context "when user is article's author" do
+      let(:article) { build :article, user: user }
 
-      it "disallows to manage article" do
-        expect(policy.manage?).to be false
+      it "allows to update article" do
+        expect(policy.update?).to be true
       end
     end
   end

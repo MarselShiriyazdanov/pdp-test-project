@@ -1,5 +1,5 @@
 class ArticlePolicy < ApplicationPolicy
-  def manage?
-    user && user.admin?
+  def update?
+    user && user.id == record.user_id
   end
 end

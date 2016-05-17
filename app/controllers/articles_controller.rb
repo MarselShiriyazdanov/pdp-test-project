@@ -1,18 +1,18 @@
 class ArticlesController < ApplicationController
-  before_action :authorize_user!, only: %i(new create edit update)
+  before_action :authenticate_user!, only: %i(new create edit update)
 
-  respond_to(:html)
   expose(:article, attributes: :article_params)
   expose(:comment) { article.comments.build }
 
   def create
     article.user = current_user
-    flash[:notice] = t("flash_notices.article_created") if article.save
+    article.save
     respond_with(article)
   end
 
   def update
-    flash[:notice] = t("flash_notices.article_updated") if article.save
+    authorize article
+    article.save
     respond_with(article)
   end
 
@@ -23,6 +23,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    authorize article, :update?
   end
 
   def new
@@ -32,10 +33,5 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:text, :title)
-  end
-
-  def authorize_user!
-    authenticate_user!
-    authorize(article, :manage?)
   end
 end

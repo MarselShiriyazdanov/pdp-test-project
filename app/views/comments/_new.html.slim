@@ -2,7 +2,6 @@
   = form_for([article, comment]) do |f|
     fieldset
       legend What do you think?
-      = render "shared/messages", object: comment
       .row.text
         = f.label :text
         = f.text_area :text

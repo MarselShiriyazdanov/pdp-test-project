@@ -3,7 +3,7 @@
     .column.large-4
       h1
         = link_to article.title, article_path(article)
-    - if policy(article).manage?
+    - if policy(article).update?
       .column.large-1.edit-article
         h6
           = link_to "Edit", edit_article_path(article)
