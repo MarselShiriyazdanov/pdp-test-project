@@ -84,6 +84,7 @@ en:
       main:
         dashboard: 'Dashboard'
         feedback: 'Contact Us'
+        about_us: 'About Us'
         add_article: 'Add new article'
       user:
         sign_in: 'Sign in'
