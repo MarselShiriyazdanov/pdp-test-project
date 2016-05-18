@@ -21,6 +21,8 @@ gem "active_link_to"
 gem "metamagic"
 gem "simple_form"
 gem "slim"
+gem "cloudinary"
+gem "attachinary"
 
 # all other gems
 gem "decent_decoration"

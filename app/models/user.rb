@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
   has_many :comments
 
   validates :full_name, presence: true
+
+  has_attachment :avatar
 end
