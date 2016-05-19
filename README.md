@@ -49,3 +49,17 @@ Scripts
 Production
 -
 https://still-spire-1631.herokuapp.com/
+
+Requirements
+-
+  -  User can sign up.
+  -  User can sign in.
+  -  User can recover his/her password.
+  -  User can sign out.
+  -  User can upload profile picture.
+  -  User can create an article with necessary fields: Title, Text.
+  -  Users can observe articles on main page of project(paginated and sorted by recent).
+  -  Users can leave comments to articles with single Text field.
+  -  User can edit article created by this user.
+  -  User can send Email via Contact form.
+  -  User can view About Us page.
